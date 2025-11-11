@@ -136,7 +136,6 @@ If you want to use the object’s extra features, you must **relabel the box** (
 | Downcasting             | Changes reference type           | Compile + Runtime | `((B)obj).onlyInB();`          |
 
 ---
-
 ### 🔹 10. One-line Summary
 
 > **The reference type decides *what you can do*;
