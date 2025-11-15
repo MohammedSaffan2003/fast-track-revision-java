@@ -142,3 +142,59 @@ If you want to use the object’s extra features, you must **relabel the box** (
 > the object type decides *how it’s done*.**
 
 ---
+
+<details>
+    <summary>Example considering the List and ArrayList</summary>
+    
+### 1️⃣ Reference type vs object type
+
+In Java:
+
+* **Reference type** → what the compiler sees, what methods you’re allowed to call.
+* **Object type** → the actual runtime object, which may have more methods.
+
+```java
+List<Integer> list = new ArrayList<>();
+list.add(10);         // ✅ allowed because add() is in List
+// list.ensureCapacity(100);  // ❌ compiler error! Not in List
+```
+
+* Even though `list` **is actually an ArrayList**, the compiler only allows **methods in List**.
+* If you want `ArrayList`-specific methods:
+
+```java
+((ArrayList<Integer>) list).ensureCapacity(100); // ✅ works
+```
+
+---
+
+### 2️⃣ Why use a broader type?
+
+Using a broader type like `List` is actually **a design choice**, not a limitation:
+
+1. **Flexibility**: Your code can accept *any* List implementation (ArrayList, LinkedList, CopyOnWriteArrayList…).
+
+   ```java
+   void processList(List<String> l) { ... }
+   ```
+
+   You don’t care if it’s ArrayList or LinkedList — just that it behaves like a List.
+
+2. **Decoupling**: Your code depends on the interface, not the specific implementation.
+
+   * Makes swapping implementations easier later.
+   * Makes testing easier (you could pass a mock List, for example).
+
+3. **Safety**: Forces you to write code that uses **general behavior**, rather than relying on class-specific tricks.
+
+---
+
+### 3️⃣ Trade-off
+
+* ✅ **Pros**: Flexibility, easier maintenance, polymorphism.
+* ⚠️ **Cons**: You lose access to class-specific methods unless you cast.
+
+Think of it like **using a universal remote**. You can control any TV (interface methods), but you can’t use brand-specific features unless you switch to the TV’s actual remote (casting).
+
+---
+</details>
